@@ -1,0 +1,105 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner enter = new Scanner(System.in);
+        while (true){
+            System.out.println("Оберіть завдання, натисніть цифру: \n1 - Приклад з циклом; \n2 - Цикли; \n3 - Сума; \n4 - Діапазон;");
+            int zav = enter.nextInt();
+            switch (zav) {
+                case 1:
+                    try {
+                        boolean error = true;
+                        int x, y, z;
+                        while (error) {
+                            System.out.println("Введіть 3 цілих числа > 0: ");
+                            x = enter.nextInt();
+                            y = enter.nextInt();
+                            z = enter.nextInt();
+                            if (x != 0 && y != 0 && z != 0) {
+                                error = false;
+                                double t = ((1 + z) * ((x + (float) y / (float) z) / (x - ((float) 1 / (1 + x * x)))));
+                                System.out.println("t = " + (float) t);
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Оберіть форму:\n1 - З використанням циклу з параметром;\n2 - З використанням циклу з передумовою;\n3 - З використанням циклу з післяумовою;");
+                    zav = enter.nextInt();
+                    int count = 0, sym = 0;
+                    int i;
+                    switch (zav) {
+                        case 1 -> {
+                            for (i = 1; i <= 80; i++) {
+                                if (i % 2 != 0) {
+                                    sym += i;
+                                    count++;
+                                }
+                            }
+                            System.out.println("Середнє арифметичне всіх непарних чисел(" + count + "): " + (sym / count));
+                        }
+                        case 2 -> {
+                            i = 1;
+                            while (i <= 80) {
+                                if (i % 2 != 0) {
+                                    sym += i;
+                                    count++;
+                                }
+                                i++;
+                            }
+                            System.out.println("Середнє арифметичне всіх непарних чисел(" + count + "): " + sym / count);
+                        }
+                        case 3 -> {
+                            i = 1;
+                            do {
+                                if (i % 2 != 0) {
+                                    sym += i;
+                                    count++;
+                                }
+                                i++;
+                            } while (i <= 80);
+                            System.out.println("Середнє арифметичне всіх непарних чисел(" + count + "): " + sym / count);
+                        }
+                        default -> System.out.println("Невірне число.");
+                    }
+                    break;
+                case 3:
+                    try {
+                        int a, n;
+                        System.out.println("Введіть 2 числа a та n: ");
+                        a = enter.nextInt();
+                        n = enter.nextInt();
+                        for (int j = 0; j <= n; j++) {
+                            a+=j;
+                        }
+                        System.out.println("Результат: "+a);
+                    } catch (Exception e) {
+                        System.out.println("Error");
+                    }
+                    break;
+                case 4:
+                    double a = 1, b = 2;
+                    double x;
+                    for (x = a; x <= b; x += 0.025) {
+                        try {
+                            if ((float) (Math.pow(Math.log(x),2)) != -Double.POSITIVE_INFINITY)
+                                System.out.println("y = " + (float) x + "\t\t\tt = " + (float) (Math.pow(Math.log(x),2)));
+                            else
+                                throw new Exception();
+                        } catch (Exception er) {
+                            System.out.println("y = " + x + "\t\t\tt = Помилка значень.");
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("Невірне число.");
+                    break;
+            }
+        }
+    }
+}
