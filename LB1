@@ -1,0 +1,114 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main { // Варіант 17
+    public static double findDist(int x, int y, int x2, int y2){
+        return Math.sqrt(Math.pow(x2-x,2)+Math.pow(y2-y,2));
+    }
+    public static void main(String[] args) {
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Оберіть завдання: \n1 - Оператора розгалуження if;    \n2 - Площа кола та квадрата;    \n3 - Поштові ндекси;    \n4 - Рівняння;");
+            int task = scanner.nextInt();
+            switch (task) {
+                case 1:
+                    System.out.println("Оберіть спосіб:\n1 - з використанням скороченої форми оператора розгалуження if;\n2 - з використанням повної форми оператора розгалуження if … else;");
+                    task = scanner.nextInt();
+                    try {
+                        System.out.println("Введіть три числа a, b та c, але з умовою, що друге більше за перше число: ");
+                        float a = scanner.nextFloat(), b = scanner.nextFloat(), c = scanner.nextInt();
+                        if (b<a){
+                            throw new Exception();
+                        }
+                        switch (task) {
+                            case 1:
+                                if (c > 0)
+                                    System.out.println("y = " + (Math.sqrt(b-a)+2*Math.sqrt(c)));
+                                if (c == 0)
+                                    System.out.println("y = " + (b/(c-6*a)));
+                                if (c < 0)
+                                    System.out.println("y = " + (b+12*Math.pow(c,3)));
+                                break;
+                            case 2:
+                                if (c > 0)
+                                    System.out.println("y = " + (Math.sqrt(b-a)+2*Math.sqrt(c)));
+                                else if (c == 0)
+                                    System.out.println("y = " + (b/(c-6*a)));
+                                else
+                                    System.out.println("y = " + (b+12*Math.pow(c,3)));
+                                break;
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("Помилка значень");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Введіть радіус кола та довжину сторони квадрата:");
+                    float r = scanner.nextFloat(), a = scanner.nextFloat();
+                    double Sr = Math.PI*Math.pow(r,2), Sa = Math.pow(a,2);
+                    if (Sr>Sa)
+                        System.out.println("Коло не поміститься у квадрат.");
+                    else
+                        System.out.println("Коло поміститься у квадрат.");
+                    break;
+                case 3:
+                    System.out.println("Введіть поштовий індекс міста:");
+                    task = scanner.nextInt();
+                    switch (task){
+                        case 58000:
+                            System.out.println("Чернівці");
+                            break;
+                        case 78000:
+                            System.out.println("Івано-Франківськ");
+                            break;
+                        case 82000:
+                            System.out.println("Львів");
+                            break;
+                        case 94000:
+                            System.out.println("Луганськ");
+                            break;
+                        case 75000:
+                            System.out.println("Херсон");
+                            break;
+                        case 17000:
+                            System.out.println("Чернігів");
+                            break;
+                        case 06000:
+                            System.out.println("Київ");
+                            break;
+                        case 13000:
+                            System.out.println("Житомир");
+                            break;
+                        case 47000:
+                            System.out.println("Тернопіль");
+                            break;
+                        case 42000:
+                            System.out.println("Суми");
+                            break;
+                        case 99000:
+                            System.out.println("Севастополь");
+                            break;
+                        default:
+                            System.out.println("Такого індексу ми поки не знаємо.");
+                    }
+                    break;
+                case 4:
+                    try {
+                        System.out.println("Введіть 3 додатніх числа a, y та z, з умовою, що y<a:");
+                        a = scanner.nextFloat(); float y = scanner.nextFloat(), z = scanner.nextFloat();
+                        if (y*y>a*a){
+                            double res = (a*Math.sqrt(Math.pow(y,2)-2*a)+Math.pow(Math.cos(z),2));
+                            System.out.println("a = " + (float)res);
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("Невірне число.");
+                    }
+                    break;
+                default:
+                    System.out.println("Невірне число.");
+                    break;
+            }
+        }
+    }
+}
