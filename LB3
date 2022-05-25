@@ -1,0 +1,130 @@
+package com.company;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+    static Scanner scan = new Scanner(System.in);
+    static Random rand = new Random();
+    static int size;
+
+    static int[] createMass() {
+        System.out.println("Введіть розмір масиву: ");
+        size = scan.nextInt();
+        int[] mass = new int[size];
+        System.out.println("Введіть елементи масиву: ");
+        for (int i = 0; i < size; i++) {
+            mass[i] = scan.nextInt();
+        }
+        return mass;
+    }
+    static int[] createRandMass(int min, int max) {
+        System.out.println("Введіть розмір масиву: ");
+        size = scan.nextInt();
+        int[] mass = new int[size];
+        for (int i = 0; i < size; i++) {
+            mass[i] = rand.nextInt(max - min) + min;
+        }
+        return mass;
+    }
+
+    static void printMass(int[] mass) {
+        String s = "";
+        for (int i = 0; i < mass.length; i++) {
+            s+=mass[i]+" ";
+        }
+        System.out.println(s);
+    }
+
+    static int findMinus(int[] mass) { // знаходить кількість від'ємних елементів
+        int kst = 0;
+        for (int i = 0; i < size; i++) {
+            if (mass[i] < 0) {
+                kst++;
+            }
+        }
+        return kst;
+    }
+
+    static int fintSerArf(int[] mass){ //знаходить та повертає середнє арифметичне
+        int sum = 0;
+        for (int i = 0; i < size; i++) {
+            sum+=mass[i];
+        }
+        return sum/size;
+    }
+    static int[] addNum(int[]mass, int num){ // добавляє до кожного елемента масива задане число
+        for (int i = 0; i < size; i++) {
+            mass[i]+=num;
+        }
+        return mass;
+    }
+    static void Task1(int[]mass){
+        if (findMinus(mass)>fintSerArf(mass)){ // якщо кількість від'ємних елементів більше за середнє арифметичне добавляє 10, інакше виводить нулі
+            mass = addNum(mass,10);
+            printMass(mass);
+        }else{
+            String s = "";
+            for (int i = 0; i < size; i++) {
+                s+="0 ";
+            }
+            System.out.println(s);
+        }
+    }
+
+    static int findMin(int[] mass) { // знаходить мінімальне за модулем число
+        int min = mass[0], maxIn = 0;
+        for (int i = 0; i < size; i++) {
+            if (Math.abs(min) > Math.abs(mass[i])) {
+                min = mass[i];
+                maxIn = i;
+            }
+        }
+        return maxIn;
+    }
+    static void afterMin(int[] mass) { // Сума елементів розташованих після мінімального за модулем числом
+        int sum = 0, min = findMin(mass);
+        for (int i = min + 1; i < size; i++) {
+            sum += mass[i];
+        }
+        System.out.println("Сума елементів розташованих після мінімального за модулем числом(" + mass[min] + ") = " + sum + ";");
+    }
+
+    public static void main(String[] args) {
+        while (true){
+            System.out.println("Оберіть завдання, натисніть цифру: \n1 - Знайти кількість від'ємних елементів; \n2 - Визначити a) кількість від’ємних елементів масиву, " +
+                    "більших за число п’ять; б) суму елементів масиву, розташованих \n" +
+                    "після мінімального за модулем елемента");
+            int task = scan.nextInt();
+            switch (task) {
+                case 1:
+                    int[] mass = createMass();
+                    Task1(mass);
+                    break;
+                case 2:
+                    System.out.println("Оберіть спосіб вводу? \n1 - Ввід з клавіатури; \n2 - Рандомний ввід на проміжку [-100;100];");
+                    task = scan.nextInt();
+                    switch (task) {
+                        case 1:
+                            mass = createMass();
+                            System.out.println("Кількість від’ємних елементів масиву: " + findMinus(mass));
+                            afterMin(mass);
+                            break;
+                        case 2:
+                            mass = createRandMass(-100, 100);
+                            printMass(mass);
+                            System.out.println("Кількість від’ємних елементів масиву: " + findMinus(mass));
+                            afterMin(mass);
+                            break;
+                        default:
+                            System.out.println("Невірне число.");
+                            break;
+                    }
+                    break;
+                default:
+                    System.out.println("Невірне число.");
+                    break;
+            }
+        }
+    }
+}
