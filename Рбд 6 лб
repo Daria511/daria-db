@@ -1,0 +1,24 @@
+#1. проекція таблиці вчителів
+create or replace view view1 as select distinct surname, name, fname from teachers;   
+select * from view1;
+
+#2. проекція вчителів у яких рік народження 2000 року
+create or replace view view2 as select distinct surname, name, fname, datebd from teachers
+    where Year(datebd) = 2000;   
+select * from view2;
+
+#3. селекція учнів у яких прізвище починаєтся на Л
+select surname, name, fname from students
+    where surname like 'Л%';  
+
+#4. Запит на виконання натурального з’єднання у будь-яких таблицях вашої БД.
+#студенти та їх група
+select students.surname, students.name, students.fname, groups.name as 'Group name'
+from students, groups
+where students.id_group = groups.id_group;
+
+#5. Запит на виконання умовного з’єднання для таблиць вашої БД
+#студенти, у яких немає інформації про батьків та їх група
+select students.surname, students.name, students.fname, groups.name as 'Group name'
+from students, groups
+where students.id_group = groups.id_group and students.parents_info is null;
