@@ -1,0 +1,43 @@
+#--1. Відсортувати вчителів по прізвищу
+select surname, name, fname
+from teachers
+order by surname asc;
+
+#--2. 3 наймолодших студенти
+select surname, name, fname, datebd
+from students
+order by datebd desc
+limit 3;
+
+#--3. Кількість курсів певної мови, відсортовані за кількістю
+select languages.name, Count(courses.id_language)
+from languages join courses on languages.id_language = courses.id_language
+group by languages.name
+order by Count(courses.id_language);  
+
+#--4. Вчителі відсортовані за ім'ям та прізвищем
+select surname, name, fname
+from teachers
+order by name asc, surname asc;
+
+#--5. Кількість студентів, які народились певного року, відсортоване за кількістю
+select Year(students.datebd), Count(*)
+from students 
+group by Year(students.datebd)
+order by Count(*);
+
+#--6. Відсортувати вчителів по даті початку роботи
+select surname, name, fname, startdate
+from teachers
+order by startdate asc;
+
+#--7. Найстарший учень
+select surname, name, fname, datebd
+from students
+order by datebd asc
+limit 1;
+
+#--8. Кількість студентів, які народились у певний місяць
+select Month(datebd), Count(*)
+from students 
+group by Month(datebd);
