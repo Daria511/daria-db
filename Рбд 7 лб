@@ -1,0 +1,45 @@
+#--1. Вчителі у яких прізвище починаєтся на А
+select surname, name, fname from teachers
+    where surname like 'А%';   
+
+#--2. Студенти, у яких прізвище та ім`я починаются на ту саму літеру
+select surname, name, fname from students
+    where Left(surname, 1) = Left(name, 1);   
+
+#--3. 3 найстарших вчителя
+select surname, name, fname, datebd
+from teachers
+order by datebd asc
+limit 3;
+
+#--4. Вчителі, у яких номер телефона починається на 099
+select surname, name, fname, phone from teachers
+    where phone like '099%';   
+    
+#--5. Кількість мов на курси
+select languages.name, Count(courses.id_language)
+from languages join courses on languages.id_language = courses.id_language
+group by languages.name;    
+    
+#--6. Кількість студентів, які народились певного року
+select Year(students.datebd), Count(*)
+from students 
+group by Year(students.datebd);
+
+#--7. Курси англійської та німецької мови
+select courses.name, courses.year, courses.timetake, languages.name
+from languages join courses on languages.id_language = courses.id_language
+where languages.name in ('Англійська','Німецька');
+
+#--8. Вчителі у яких день народження цього місяця
+select surname, name, fname, datebd from teachers
+where Month(datebd) = Month(CURRENT_DATE()); 
+
+#--9. Учні, які народились влітку
+select surname, name, fname, datebd from students
+where Month(datebd) between 6 and 8;
+
+#--10. Найдосвідчений вчитель
+select surname, name, fname, startdate from teachers
+order by startdate ASC
+limit 1;
