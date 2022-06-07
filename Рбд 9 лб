@@ -1,0 +1,25 @@
+#--1. Кількість студентів
+select Count(id_student)
+from students;
+
+#--2. Наймолодший студент
+select surname, name, fname, datebd
+from students
+where datebd = (select Max(datebd));
+                
+#--3. Найстарший вчитель
+select surname, name, fname, datebd
+from teachers
+where datebd = (select Min(datebd));  
+
+#--4. Кількість учнів, які народились певного місяця весни
+select Month(datebd), Count(*)
+from students 
+where Month(datebd) between 3 and 5
+group by Month(datebd);
+                
+#--5. Кількість студентів з однаковими прізвищами (Прізвище - кількість)
+select surname, Count(*)
+from students 
+group by surname
+having Count(*) > 1;
